@@ -13,19 +13,16 @@ namespace DesafioProjetoHospedagem.Models
             DiasReservados = diasReservados;
         }
 
+        /// <summary>
+        /// Verifica se a capacidade é maior ou igual ao número de hóspedes sendo recebido
+        /// </summary>
+        /// <param name="hospedes"></param>
         public void CadastrarHospedes(List<Pessoa> hospedes)
         {
-            // TODO: Verificar se a capacidade é maior ou igual ao número de hóspedes sendo recebido
-            // *IMPLEMENTE AQUI*
-            if (true)
-            {
-                Hospedes = hospedes;
-            }
-            else
-            {
-                // TODO: Retornar uma exception caso a capacidade seja menor que o número de hóspedes recebido
-                // *IMPLEMENTE AQUI*
-            }
+            if (Suite.Capacidade < hospedes.Count)
+                throw new ArgumentException("Número de hóspedes maior do que a capacidade suportada.");
+
+            Hospedes = hospedes;
         }
 
         public void CadastrarSuite(Suite suite)
@@ -33,26 +30,26 @@ namespace DesafioProjetoHospedagem.Models
             Suite = suite;
         }
 
+        /// <summary>
+        /// Retorna a quantidade de hóspedes (propriedade Hospedes)
+        /// </summary>
+        /// <returns></returns>
         public int ObterQuantidadeHospedes()
         {
-            // TODO: Retorna a quantidade de hóspedes (propriedade Hospedes)
-            // *IMPLEMENTE AQUI*
-            return 0;
+            return Hospedes.Count;
         }
 
+        /// <summary>
+        /// Retorna o valor da diária
+        /// Caso os dias reservados forem maior ou igual a 10, conceder um desconto de 10%
+        /// </summary>
+        /// <returns></returns>
         public decimal CalcularValorDiaria()
         {
-            // TODO: Retorna o valor da diária
-            // Cálculo: DiasReservados X Suite.ValorDiaria
-            // *IMPLEMENTE AQUI*
-            decimal valor = 0;
+            decimal valor = DiasReservados * Suite.ValorDiaria;
 
-            // Regra: Caso os dias reservados forem maior ou igual a 10, conceder um desconto de 10%
-            // *IMPLEMENTE AQUI*
-            if (true)
-            {
-                valor = 0;
-            }
+            if (DiasReservados >= 10)
+                valor = (decimal)((long)valor * 0.9);
 
             return valor;
         }
